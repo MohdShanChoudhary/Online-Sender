@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Online Sender - By SHAN</title>
-    <meta name="description" content="Share text instantly with anyone, anywhere. No login required.">
+    <link rel="icon" type="image/png" href="Online Sender By SHAN2.png">
+    <meta name="description" content="Share text instantly with anyone, anywhere. No login required;">
 
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -31,6 +32,12 @@
         .header {
             text-align: center;
             margin-bottom: 30px;
+        }
+
+        /* 🔥 LOGO STYLE */
+        .logo {
+            width: 90px;
+            margin-bottom: 10px;
         }
 
         .header h1 {
@@ -125,8 +132,12 @@
 
 <body>
 <div class="container">
+
     <div class="header">
-        <h1>📋 Online Sender</h1>
+        <!-- ✅ LOGO ADDED -->
+        <img src="Online Sender By SHAN.png" alt="Online Sender Logo" class="logo">
+
+        <h1> Online Sender</h1>
         <p>Share text instantly with anyone</p>
         <span class="badge">By SHAN</span>
     </div>
@@ -161,12 +172,11 @@
     </div>
 
     <div class="footer">
-        Made with ❤️ by SHAN
+        Developed  by SHAN.
     </div>
 </div>
 
 <script>
-    // ✅ PRODUCTION API (Railway)
     const API_URL = "https://online-sender-text.up.railway.app/api/clipboard";
 
     function switchTab(tab) {
