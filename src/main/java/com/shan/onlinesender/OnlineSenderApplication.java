@@ -13,7 +13,7 @@ public class OnlineSenderApplication {
 		System.out.println("\n========================================");
 		System.out.println("🚀 Online Sender is running!");
 		System.out.println("📋 Open: http://localhost:8080");
-		System.out.println("❤️  Made by Shan");
+		System.out.println("❤️  Made by SHAN");
 		System.out.println("========================================\n");
 	}
 }

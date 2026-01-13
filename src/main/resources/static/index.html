@@ -3,14 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Online Sender - By Shan</title>
+    <title>Online Sender - By SHAN</title>
     <meta name="description" content="Share text instantly with anyone, anywhere. No login required.">
+
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -29,18 +26,6 @@
             max-width: 800px;
             width: 100%;
             padding: 40px;
-            animation: slideIn 0.5s ease;
-        }
-
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
 
         .header {
@@ -51,21 +36,14 @@
         .header h1 {
             color: #667eea;
             font-size: 2.5em;
-            margin-bottom: 10px;
-        }
-
-        .header p {
-            color: #666;
-            font-size: 1.1em;
         }
 
         .badge {
-            display: inline-block;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
             padding: 5px 15px;
             border-radius: 20px;
-            font-size: 0.9em;
+            display: inline-block;
             margin-top: 10px;
         }
 
@@ -79,11 +57,10 @@
         .tab {
             padding: 15px 30px;
             cursor: pointer;
-            border: none;
             background: none;
+            border: none;
             font-size: 1.1em;
             color: #666;
-            transition: all 0.3s;
             border-bottom: 3px solid transparent;
         }
 
@@ -93,254 +70,65 @@
             font-weight: bold;
         }
 
-        .tab:hover {
-            color: #667eea;
-        }
-
-        .tab-content {
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
-            animation: fadeIn 0.3s;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        textarea {
-            width: 100%;
-            min-height: 200px;
-            padding: 15px;
-            border: 2px solid #ddd;
-            border-radius: 10px;
-            font-size: 1em;
-            font-family: 'Courier New', monospace;
-            resize: vertical;
-            transition: border-color 0.3s;
-        }
-
-        textarea:focus {
-            outline: none;
-            border-color: #667eea;
-        }
-
-        .input-group {
-            margin: 20px 0;
-        }
-
-        .input-group label {
-            display: block;
-            margin-bottom: 8px;
-            color: #333;
-            font-weight: 600;
-        }
-
-        input[type="text"], input[type="number"] {
+        textarea, input {
             width: 100%;
             padding: 12px;
             border: 2px solid #ddd;
             border-radius: 10px;
+            margin-top: 10px;
             font-size: 1em;
-            transition: border-color 0.3s;
-        }
-
-        input:focus {
-            outline: none;
-            border-color: #667eea;
         }
 
         .btn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
             border: none;
-            padding: 15px 40px;
+            padding: 15px;
             border-radius: 10px;
             font-size: 1.1em;
             cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
             width: 100%;
             margin-top: 20px;
         }
 
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
-        }
+        .result, .alert { display: none; margin-top: 20px; }
 
-        .btn:active {
-            transform: translateY(0);
-        }
+        .result.show, .alert.show { display: block; }
 
-        .result {
-            margin-top: 20px;
-            padding: 20px;
-            background: #f8f9fa;
-            border-radius: 10px;
-            display: none;
-        }
+        .alert-success { background: #d4edda; color: #155724; padding: 15px; border-radius: 10px; }
+        .alert-error { background: #f8d7da; color: #721c24; padding: 15px; border-radius: 10px; }
 
-        .result.show {
-            display: block;
-            animation: fadeIn 0.3s;
-        }
-
-        .code-display {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-            margin: 15px 0;
-            border: 2px dashed #667eea;
-        }
-
-        .code-display .code {
+        .code {
             font-size: 2em;
-            font-weight: bold;
             color: #667eea;
+            text-align: center;
+            font-weight: bold;
             letter-spacing: 3px;
-            font-family: 'Courier New', monospace;
-        }
-
-        .copy-btn {
-            background: #28a745;
-            padding: 10px 20px;
-            margin-top: 10px;
-            font-size: 0.9em;
-        }
-
-        .copy-btn:hover {
-            box-shadow: 0 5px 20px rgba(40, 167, 69, 0.4);
-        }
-
-        .alert {
-            padding: 15px;
-            border-radius: 10px;
-            margin: 15px 0;
-            display: none;
-        }
-
-        .alert.show {
-            display: block;
-            animation: fadeIn 0.3s;
-        }
-
-        .alert-success {
-            background: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
-
-        .alert-error {
-            background: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-        }
-
-        .info-box {
-            background: #e7f3ff;
-            padding: 15px;
-            border-radius: 10px;
-            margin: 15px 0;
-            border-left: 4px solid #667eea;
-        }
-
-        .info-box p {
-            color: #333;
-            line-height: 1.6;
         }
 
         .content-display {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            margin: 15px 0;
-            border: 2px solid #ddd;
             white-space: pre-wrap;
-            word-wrap: break-word;
-            font-family: 'Courier New', monospace;
-            max-height: 400px;
+            border: 2px solid #ddd;
+            padding: 15px;
+            border-radius: 10px;
+            max-height: 300px;
             overflow-y: auto;
         }
 
-        .metadata {
-            display: flex;
-            justify-content: space-around;
-            margin: 15px 0;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .metadata-item {
-            text-align: center;
-            padding: 10px;
-        }
-
-        .metadata-item .label {
-            color: #666;
-            font-size: 0.9em;
-            margin-bottom: 5px;
-        }
-
-        .metadata-item .value {
-            color: #333;
-            font-weight: bold;
-            font-size: 1.1em;
-        }
-
         .footer {
-            text-align: center;
             margin-top: 30px;
-            padding-top: 20px;
-            border-top: 2px solid #eee;
+            text-align: center;
             color: #666;
-        }
-
-        .loader {
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #667eea;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-            margin: 20px auto;
-            display: none;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        @media (max-width: 600px) {
-            .container {
-                padding: 20px;
-            }
-
-            .header h1 {
-                font-size: 1.8em;
-            }
-
-            .tab {
-                padding: 10px 20px;
-                font-size: 1em;
-            }
-
-            .code-display .code {
-                font-size: 1.5em;
-            }
         }
     </style>
 </head>
+
 <body>
 <div class="container">
     <div class="header">
         <h1>📋 Online Sender</h1>
-        <p>Share text instantly with anyone, anywhere</p>
-        <span class="badge">By Shan</span>
+        <p>Share text instantly with anyone</p>
+        <span class="badge">By SHAN</span>
     </div>
 
     <div class="tabs">
@@ -348,237 +136,97 @@
         <button class="tab" onclick="switchTab('receive')">📥 Receive</button>
     </div>
 
-    <!-- Send Tab -->
-    <div id="send-tab" class="tab-content active">
-        <div class="info-box">
-            <p>✨ Paste your text below and get a unique code to share it with anyone!</p>
-        </div>
-
-        <div class="input-group">
-            <label for="content">Your Text/Content:</label>
-            <textarea id="content" placeholder="Paste or type your content here..."></textarea>
-        </div>
-
-        <div class="input-group">
-            <label for="expiry">Expiry Time (hours):</label>
-            <input type="number" id="expiry" value="24" min="1" max="168">
-        </div>
-
-        <button class="btn" onclick="createClipboard()">🚀 Generate Code</button>
-
-        <div class="loader" id="send-loader"></div>
+    <!-- SEND -->
+    <div id="send-tab">
+        <textarea id="content" placeholder="Paste your text here..."></textarea>
+        <input type="number" id="expiry" value="24" min="1" max="168">
+        <button class="btn" onclick="createClipboard()">Generate Code</button>
 
         <div id="send-alert" class="alert"></div>
-
         <div id="send-result" class="result">
-            <h3>✅ Your Code is Ready!</h3>
-            <div class="code-display">
-                <div class="code" id="generated-code"></div>
-            </div>
-            <p style="text-align: center; color: #666;">Share this code with anyone to access your content</p>
-            <button class="btn copy-btn" onclick="copyCode()">📋 Copy Code</button>
+            <p>Your Code:</p>
+            <div class="code" id="generated-code"></div>
         </div>
     </div>
 
-    <!-- Receive Tab -->
-    <div id="receive-tab" class="tab-content">
-        <div class="info-box">
-            <p>🔍 Enter the code you received to view the shared content!</p>
-        </div>
-
-        <div class="input-group">
-            <label for="code-input">Enter Code:</label>
-            <input type="text" id="code-input" placeholder="Enter 6-digit code (e.g., ABC123)" maxlength="6" style="text-transform: uppercase;">
-        </div>
-
-        <button class="btn" onclick="retrieveClipboard()">🔓 Retrieve Content</button>
-
-        <div class="loader" id="receive-loader"></div>
+    <!-- RECEIVE -->
+    <div id="receive-tab" style="display:none;">
+        <input type="text" id="code-input" placeholder="Enter 6-digit code">
+        <button class="btn" onclick="retrieveClipboard()">Retrieve</button>
 
         <div id="receive-alert" class="alert"></div>
-
         <div id="receive-result" class="result">
-            <h3>📄 Shared Content:</h3>
             <div class="content-display" id="retrieved-content"></div>
-
-            <div class="metadata">
-                <div class="metadata-item">
-                    <div class="label">Views</div>
-                    <div class="value" id="view-count">-</div>
-                </div>
-                <div class="metadata-item">
-                    <div class="label">Created</div>
-                    <div class="value" id="created-at">-</div>
-                </div>
-                <div class="metadata-item">
-                    <div class="label">Expires</div>
-                    <div class="value" id="expires-at">-</div>
-                </div>
-            </div>
-
-            <button class="btn copy-btn" onclick="copyContent()">📋 Copy Content</button>
         </div>
     </div>
 
     <div class="footer">
-        <p>🔒 Secure • ⚡ Fast • 🌐 No Login Required</p>
-        <p style="margin-top: 10px; font-size: 0.9em;">Made with ❤️ by Shan</p>
+        Made with ❤️ by SHAN
     </div>
 </div>
 
 <script>
-    // ============================================================
-    // API CONFIGURATION
-    // ============================================================
-
-    // IMPORTANT: Change this URL when deploying to production
-    // For LOCAL development:
-    const API_URL = 'http://localhost:8080/api/clipboard';
-
-    // For PRODUCTION (Railway/Render):
-    // const API_URL = 'https://your-app-name.railway.app/api/clipboard';
-    // const API_URL = 'https://your-app-name.onrender.com/api/clipboard';
-
-    // ============================================================
+    // ✅ PRODUCTION API (Railway)
+    const API_URL = "https://online-sender-text.up.railway.app/api/clipboard";
 
     function switchTab(tab) {
+        document.getElementById('send-tab').style.display = tab === 'send' ? 'block' : 'none';
+        document.getElementById('receive-tab').style.display = tab === 'receive' ? 'block' : 'none';
+
         document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-
         event.target.classList.add('active');
-        document.getElementById(tab + '-tab').classList.add('active');
-
-        hideElement('send-result');
-        hideElement('receive-result');
-        hideElement('send-alert');
-        hideElement('receive-alert');
     }
 
     async function createClipboard() {
         const content = document.getElementById('content').value.trim();
-        const expiry = parseInt(document.getElementById('expiry').value);
+        const expiry = document.getElementById('expiry').value;
 
-        if (!content) {
-            showAlert('send-alert', 'Please enter some content!', 'error');
-            return;
-        }
-
-        showLoader('send-loader');
-        hideElement('send-alert');
-        hideElement('send-result');
+        if (!content) return showAlert('send-alert', 'Please enter content', false);
 
         try {
-            const response = await fetch(API_URL, {
+            const res = await fetch(API_URL, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    content: content,
-                    expiryHours: expiry
-                })
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({ content, expiryHours: expiry })
             });
 
-            const data = await response.json();
+            const data = await res.json();
+            document.getElementById('generated-code').textContent = data.code;
+            showElement('send-result');
+            showAlert('send-alert', 'Code generated successfully!', true);
 
-            if (response.ok) {
-                document.getElementById('generated-code').textContent = data.code;
-                showElement('send-result');
-                showAlert('send-alert', '✅ Code generated successfully!', 'success');
-            } else {
-                showAlert('send-alert', '❌ Error: ' + (data.error || 'Failed to create clipboard'), 'error');
-            }
-        } catch (error) {
-            showAlert('send-alert', '❌ Network error. Please check if backend is running!', 'error');
-            console.error('Error:', error);
-        } finally {
-            hideLoader('send-loader');
+        } catch {
+            showAlert('send-alert', 'Network error!', false);
         }
     }
 
     async function retrieveClipboard() {
         const code = document.getElementById('code-input').value.trim().toUpperCase();
 
-        if (!code || code.length !== 6) {
-            showAlert('receive-alert', 'Please enter a valid 6-character code!', 'error');
-            return;
-        }
-
-        showLoader('receive-loader');
-        hideElement('receive-alert');
-        hideElement('receive-result');
-
         try {
-            const response = await fetch(`${API_URL}/${code}`);
+            const res = await fetch(`${API_URL}/${code}`);
+            if (!res.ok) throw new Error();
 
-            if (response.ok) {
-                const data = await response.json();
-                document.getElementById('retrieved-content').textContent = data.content;
-                document.getElementById('view-count').textContent = data.viewCount;
-                document.getElementById('created-at').textContent = formatDate(data.createdAt);
-                document.getElementById('expires-at').textContent = formatDate(data.expiresAt);
-                showElement('receive-result');
-                showAlert('receive-alert', '✅ Content retrieved successfully!', 'success');
-            } else {
-                showAlert('receive-alert', '❌ Code not found or expired!', 'error');
-            }
-        } catch (error) {
-            showAlert('receive-alert', '❌ Network error. Please check if backend is running!', 'error');
-            console.error('Error:', error);
-        } finally {
-            hideLoader('receive-loader');
+            const data = await res.json();
+            document.getElementById('retrieved-content').textContent = data.content;
+            showElement('receive-result');
+            showAlert('receive-alert', 'Content loaded!', true);
+
+        } catch {
+            showAlert('receive-alert', 'Code not found or expired', false);
         }
     }
 
-    function copyCode() {
-        const code = document.getElementById('generated-code').textContent;
-        navigator.clipboard.writeText(code).then(() => {
-            alert('✅ Code copied to clipboard: ' + code);
-        });
-    }
-
-    function copyContent() {
-        const content = document.getElementById('retrieved-content').textContent;
-        navigator.clipboard.writeText(content).then(() => {
-            alert('✅ Content copied to clipboard!');
-        });
-    }
-
-    function formatDate(dateString) {
-        const date = new Date(dateString);
-        return date.toLocaleString('en-IN', {
-            day: '2-digit',
-            month: 'short',
-            hour: '2-digit',
-            minute: '2-digit'
-        });
-    }
-
-    function showAlert(id, message, type) {
-        const alert = document.getElementById(id);
-        alert.textContent = message;
-        alert.className = 'alert alert-' + type + ' show';
-    }
-
-    function showLoader(id) {
-        document.getElementById(id).style.display = 'block';
-    }
-
-    function hideLoader(id) {
-        document.getElementById(id).style.display = 'none';
+    function showAlert(id, msg, success) {
+        const el = document.getElementById(id);
+        el.className = 'alert show ' + (success ? 'alert-success' : 'alert-error');
+        el.textContent = msg;
     }
 
     function showElement(id) {
         document.getElementById(id).classList.add('show');
     }
-
-    function hideElement(id) {
-        document.getElementById(id).classList.remove('show');
-    }
-
-    document.getElementById('code-input').addEventListener('input', function(e) {
-        e.target.value = e.target.value.toUpperCase();
-    });
 </script>
+
 </body>
 </html>
