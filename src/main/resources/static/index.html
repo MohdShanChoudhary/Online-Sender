@@ -11,54 +11,97 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Times New Roman', serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px;
+            color: #333;
         }
 
         .container {
-            background: white;
+            background: #ffffff;
             border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             max-width: 800px;
             width: 100%;
             padding: 40px;
+            border: 1px solid #e9ecef;
         }
 
         .header {
-            text-align: center;
             margin-bottom: 30px;
         }
 
-        /* 🔥 LOGO STYLE */
+        /* Header top: brand + toggle */
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
         .logo {
             width: 90px;
-            margin-bottom: 10px;
         }
 
         .header h1 {
-            color: #667eea;
+            color: #495057;
             font-size: 2.5em;
+            font-weight: 300;
+        }
+
+        .header p {
+            color: #6c757d;
+            font-size: 1.1em;
+            margin-top: 4px;
         }
 
         .badge {
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: linear-gradient(135deg, #adb5bd, #6c757d);
             color: white;
             padding: 5px 15px;
             border-radius: 20px;
             display: inline-block;
-            margin-top: 10px;
+            margin-top: 6px;
+            font-size: 0.9em;
+        }
+
+        /* Theme toggle button */
+        .theme-toggle {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 999px;
+            padding: 8px 14px;
+            font-size: 0.95em;
+            cursor: pointer;
+            color: #495057;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            transition: background 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+        }
+
+        .theme-toggle:hover {
+            background: #e9ecef;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 14px rgba(0,0,0,0.12);
         }
 
         .tabs {
             display: flex;
             gap: 10px;
+            margin-top: 20px;
             margin-bottom: 30px;
-            border-bottom: 2px solid #eee;
+            border-bottom: 2px solid #e9ecef;
         }
 
         .tab {
@@ -67,27 +110,40 @@
             background: none;
             border: none;
             font-size: 1.1em;
-            color: #666;
+            color: #6c757d;
             border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
         }
 
         .tab.active {
-            color: #667eea;
-            border-bottom-color: #667eea;
-            font-weight: bold;
+            color: #495057;
+            border-bottom-color: #495057;
+            font-weight: 500;
+        }
+
+        .tab:hover {
+            color: #343a40;
         }
 
         textarea, input {
             width: 100%;
             padding: 12px;
-            border: 2px solid #ddd;
+            border: 2px solid #e9ecef;
             border-radius: 10px;
             margin-top: 10px;
             font-size: 1em;
+            background: #b8babc;
+            color: #333;
+            transition: border-color 0.3s ease;
+        }
+
+        textarea:focus, input:focus {
+            outline: none;
+            border-color: #adb5bd;
         }
 
         .btn {
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: linear-gradient(135deg, #ffffff, #6c757d);
             color: white;
             border: none;
             padding: 15px;
@@ -96,36 +152,209 @@
             cursor: pointer;
             width: 100%;
             margin-top: 20px;
+            transition: background 0.3s ease;
+        }
+
+        .btn:hover {
+            background: linear-gradient(135deg, #6c757d, #495057);
         }
 
         .result, .alert { display: none; margin-top: 20px; }
 
         .result.show, .alert.show { display: block; }
 
-        .alert-success { background: #d4edda; color: #155724; padding: 15px; border-radius: 10px; }
-        .alert-error { background: #f8d7da; color: #721c24; padding: 15px; border-radius: 10px; }
+        .alert-success {
+            background: #768588;
+            color: #0c5460;
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid #485e62;
+        }
+
+        .alert-error {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid #f5c6cb;
+        }
 
         .code {
             font-size: 2em;
-            color: #667eea;
+            color: #495057;
             text-align: center;
             font-weight: bold;
             letter-spacing: 3px;
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px solid #e9ecef;
         }
 
         .content-display {
             white-space: pre-wrap;
-            border: 2px solid #ddd;
+            border: 2px solid #e9ecef;
             padding: 15px;
             border-radius: 10px;
             max-height: 300px;
             overflow-y: auto;
+            background: #f8f9fa;
+            color: #333;
         }
 
         .footer {
             margin-top: 30px;
             text-align: center;
-            color: #666;
+            color: #6c757d;
+            font-size: 0.9em;
+        }
+
+        /* ---------- DARK MODE ---------- */
+
+        body.dark-mode {
+            background: radial-gradient(circle at top, #1f2933 0%, #0b1120 45%, #020617 100%);
+            color: #e5e7eb;
+        }
+
+        body.dark-mode .container {
+            background: #020617;
+            border-color: rgba(148, 163, 184, 0.35);
+            box-shadow:
+                0 22px 60px rgba(15, 23, 42, 0.9),
+                0 0 0 1px rgba(148, 163, 184, 0.08);
+        }
+
+        body.dark-mode .header h1 {
+            color: #e5e7eb;
+        }
+
+        body.dark-mode .header p {
+            color: #9ca3af;
+        }
+
+        body.dark-mode .badge {
+            background: linear-gradient(135deg, #334155, #1d2939);
+            color: #e5e7eb;
+        }
+
+        body.dark-mode .tabs {
+            border-bottom-color: rgba(51, 65, 85, 0.7);
+        }
+
+        body.dark-mode .tab {
+            color: #9ca3af;
+        }
+
+        body.dark-mode .tab.active {
+            color: #e5e7eb;
+            border-bottom-color: #38bdf8;
+        }
+
+        body.dark-mode .tab:hover {
+            color: #f9fafb;
+        }
+
+        body.dark-mode textarea,
+        body.dark-mode input {
+            background: #020617;
+            color: #e5e7eb;
+            border-color: rgba(148, 163, 184, 0.5);
+        }
+
+        body.dark-mode textarea::placeholder,
+        body.dark-mode input::placeholder {
+            color: #6b7280;
+        }
+
+        body.dark-mode .btn {
+            background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+            color: #0b1120;
+            box-shadow: 0 14px 30px rgba(56, 189, 248, 0.35);
+        }
+
+        body.dark-mode .btn:hover {
+            background: linear-gradient(135deg, #0ea5e9, #0284c7);
+        }
+
+        body.dark-mode .code {
+            background: #020617;
+            color: #e5e7eb;
+            border-color: rgba(148, 163, 184, 0.6);
+        }
+
+        body.dark-mode .content-display {
+            background: #020617;
+            color: #e5e7eb;
+            border-color: rgba(51, 65, 85, 0.9);
+        }
+
+        body.dark-mode .footer {
+            color: #6b7280;
+        }
+
+        body.dark-mode .theme-toggle {
+            background: #020617;
+            color: #e5e7eb;
+            border-color: rgba(148, 163, 184, 0.5);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+                margin: 10px;
+            }
+
+            .header h1 {
+                font-size: 2em;
+            }
+
+            .logo {
+                width: 70px;
+            }
+
+            .tab {
+                padding: 10px 20px;
+                font-size: 1em;
+            }
+
+            .btn {
+                padding: 12px;
+                font-size: 1em;
+            }
+
+            .code {
+                font-size: 1.5em;
+            }
+
+            textarea, input {
+                font-size: 0.9em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .tabs {
+                flex-direction: column;
+                gap: 5px;
+            }
+
+            .tab {
+                padding: 10px;
+                text-align: center;
+            }
+
+            .container {
+                padding: 15px;
+            }
+
+            .brand {
+                flex-direction: row;
+                align-items: center;
+            }
         }
     </style>
 </head>
@@ -134,23 +363,32 @@
 <div class="container">
 
     <div class="header">
-        <!-- ✅ LOGO ADDED -->
-        <img src="Online Sender By SHAN.png" alt="Online Sender Logo" class="logo">
+        <div class="header-top">
+            <div class="brand">
+                <img src="Online_Sender_By_SHAN.png" alt="Online Sender Logo" class="logo">
+                <div>
+                    <h1> Online Sender</h1>
+                    <p>Share text instantly with anyone</p>
+                    <span class="badge">By SHAN</span>
+                </div>
+            </div>
 
-        <h1> Online Sender</h1>
-        <p>Share text instantly with anyone</p>
-        <span class="badge">By SHAN</span>
-    </div>
+            <!-- Dark mode toggle button -->
+            <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
+                🌙
+            </button>
+        </div>
 
-    <div class="tabs">
-        <button class="tab active" onclick="switchTab('send')">📤 Send</button>
-        <button class="tab" onclick="switchTab('receive')">📥 Receive</button>
+        <div class="tabs">
+            <button class="tab active" onclick="switchTab('send')">Send</button>
+            <button class="tab" onclick="switchTab('receive')">Receive</button>
+        </div>
     </div>
 
     <!-- SEND -->
     <div id="send-tab">
         <textarea id="content" placeholder="Paste your text here..."></textarea>
-        <input type="number" id="expiry" value="24" min="1" max="168">
+        <input type="number" id="expiry" value="24" min="1" max="168" placeholder="Expiry hours (1-168)">
         <button class="btn" onclick="createClipboard()">Generate Code</button>
 
         <div id="send-alert" class="alert"></div>
@@ -172,7 +410,7 @@
     </div>
 
     <div class="footer">
-        Developed  by SHAN.
+        Developed by SHAN.
     </div>
 </div>
 
@@ -235,6 +473,14 @@
 
     function showElement(id) {
         document.getElementById(id).classList.add('show');
+    }
+
+    // Dark / Light theme toggle
+    function toggleTheme() {
+        document.body.classList.toggle('dark-mode');
+        const btn = document.querySelector('.theme-toggle');
+        const isDark = document.body.classList.contains('dark-mode');
+        btn.textContent = isDark ? '☀️' : '🌙';
     }
 </script>
 
