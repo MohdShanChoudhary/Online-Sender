@@ -1,10 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Sender - By SHAN</title>
+    <link rel="icon" type="image/png" href="Online Sender By SHAN2.png">
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Times New Roman', serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            display: flex; justify-content: center; align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            background: white; padding: 30px; border-radius: 15px;
+            width: 90%; max-width: 600px;
+        }
+        textarea, input {
+            width: 100%; padding: 10px; margin-top: 10px;
+        }
+        .btn {
+            margin-top: 15px; padding: 10px; width: 100%;
+        }
+        .alert { margin-top: 10px; }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h2>Online Sender</h2>
+
+    <textarea id="content" placeholder="Enter text"></textarea>
+    <input type="number" id="expiry" value="24">
+
+    <button class="btn" onclick="createClipboard()">Generate Code</button>
+
+    <div id="send-alert" class="alert"></div>
+
+    <br><br>
+
+    <input type="text" id="code-input" placeholder="Enter code">
+    <button class="btn" onclick="retrieveClipboard()">Retrieve</button>
+
+    <div id="receive-alert" class="alert"></div>
+    <div id="retrieved-content"></div>
+
+</div>
+
+<script>
 const API_URL = "https://online-sender-2.onrender.com";
 
 async function createClipboard() {
     const content = document.getElementById('content').value.trim();
     const expiry = document.getElementById('expiry').value;
 
-    if (!content) return showAlert('send-alert', 'Please enter content', false);
+    if (!content) return showAlert('send-alert', 'Enter content', false);
 
     try {
         const res = await fetch(`${API_URL}/api/clipboard`, {
@@ -13,29 +67,39 @@ async function createClipboard() {
             body: JSON.stringify({ content, expiryHours: expiry })
         });
 
+        if (!res.ok) throw new Error();
+
         const data = await res.json();
-        document.getElementById('generated-code').textContent = data.code;
-        showElement('send-result');
-        showAlert('send-alert', 'Code generated successfully!', true);
+        showAlert('send-alert', 'Code: ' + data.code, true);
 
     } catch {
-        showAlert('send-alert', 'Network error!', false);
+        showAlert('send-alert', 'Error!', false);
     }
 }
 
 async function retrieveClipboard() {
-    const code = document.getElementById('code-input').value.trim().toUpperCase();
+    const code = document.getElementById('code-input').value.trim();
 
     try {
         const res = await fetch(`${API_URL}/api/clipboard/${code}`);
+
         if (!res.ok) throw new Error();
 
         const data = await res.json();
-        document.getElementById('retrieved-content').textContent = data.content;
-        showElement('receive-result');
-        showAlert('receive-alert', 'Content loaded!', true);
+        document.getElementById('retrieved-content').innerText = data.content;
+        showAlert('receive-alert', 'Success', true);
 
     } catch {
-        showAlert('receive-alert', 'Code not found or expired', false);
+        showAlert('receive-alert', 'Not found', false);
     }
 }
+
+function showAlert(id, msg, success) {
+    const el = document.getElementById(id);
+    el.innerText = msg;
+    el.style.color = success ? "green" : "red";
+}
+</script>
+
+</body>
+</html>
