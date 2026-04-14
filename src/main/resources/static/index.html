@@ -56,7 +56,7 @@ const API_URL = "https://online-sender-2.onrender.com";
 
 async function createClipboard() {
     const content = document.getElementById('content').value.trim();
-    const expiry = document.getElementById('expiry').value;
+   const expiry = parseInt(document.getElementById('expiry').value);
 
     if (!content) return showAlert('send-alert', 'Enter content', false);
 
