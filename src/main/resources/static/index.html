@@ -5,50 +5,304 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Online Sender - By SHAN</title>
     <link rel="icon" type="image/png" href="Online Sender By SHAN2.png">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet">
 
     <style>
+        :root {
+            --bg: #0e0e12;
+            --surface: #16161d;
+            --surface2: #1e1e28;
+            --border: #2a2a38;
+            --accent: #7c5cfc;
+            --accent2: #c084fc;
+            --success: #34d399;
+            --error: #f87171;
+            --text: #e8e8f0;
+            --muted: #6b6b80;
+        }
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
+
         body {
-            font-family: 'Times New Roman', serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            display: flex; justify-content: center; align-items: center;
+            font-family: 'Syne', sans-serif;
+            background: var(--bg);
+            color: var(--text);
             min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            background-image:
+                radial-gradient(ellipse at 20% 50%, rgba(124, 92, 252, 0.08) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 20%, rgba(192, 132, 252, 0.06) 0%, transparent 50%);
         }
+
         .container {
-            background: white; padding: 30px; border-radius: 15px;
-            width: 90%; max-width: 600px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            width: 90%;
+            max-width: 520px;
+            padding: 36px;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(124,92,252,0.1);
         }
-        textarea, input {
-            width: 100%; padding: 10px; margin-top: 10px;
+
+        .header {
+            margin-bottom: 32px;
         }
+
+        .header h2 {
+            font-size: 26px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header p {
+            color: var(--muted);
+            font-size: 13px;
+            margin-top: 4px;
+            font-family: 'Space Mono', monospace;
+        }
+
+        .section-label {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 12px;
+        }
+
+        .divider {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 28px 0;
+        }
+
+        textarea, input[type="text"], input[type="number"] {
+            width: 100%;
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            color: var(--text);
+            font-family: 'Space Mono', monospace;
+            font-size: 13px;
+            padding: 12px 14px;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            resize: vertical;
+        }
+
+        textarea {
+            min-height: 110px;
+        }
+
+        textarea:focus, input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(124, 92, 252, 0.15);
+        }
+
+        textarea::placeholder, input::placeholder {
+            color: var(--muted);
+        }
+
+        .row {
+            display: flex;
+            gap: 12px;
+            margin-top: 12px;
+            align-items: center;
+        }
+
+        .row input[type="number"] {
+            width: 90px;
+            flex-shrink: 0;
+        }
+
+        .row label {
+            font-size: 12px;
+            color: var(--muted);
+            font-family: 'Space Mono', monospace;
+            white-space: nowrap;
+        }
+
         .btn {
-            margin-top: 15px; padding: 10px; width: 100%;
+            margin-top: 14px;
+            padding: 12px 20px;
+            width: 100%;
+            border: none;
+            border-radius: 10px;
+            font-family: 'Syne', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+            overflow: hidden;
         }
-        .alert { margin-top: 10px; }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 8px 20px rgba(124, 92, 252, 0.35);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        .btn-secondary {
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            color: var(--text);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            background: rgba(124, 92, 252, 0.08);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        .alert {
+            margin-top: 12px;
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            display: none;
+            word-break: break-all;
+        }
+
+        .alert.success {
+            background: rgba(52, 211, 153, 0.1);
+            border: 1px solid rgba(52, 211, 153, 0.3);
+            color: var(--success);
+            display: block;
+        }
+
+        .alert.error {
+            background: rgba(248, 113, 113, 0.1);
+            border: 1px solid rgba(248, 113, 113, 0.3);
+            color: var(--error);
+            display: block;
+        }
+
+        .code-display {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .code-val {
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: 4px;
+            font-family: 'Space Mono', monospace;
+            color: var(--success);
+        }
+
+        .copy-btn {
+            background: rgba(52, 211, 153, 0.15);
+            border: 1px solid rgba(52, 211, 153, 0.3);
+            color: var(--success);
+            border-radius: 6px;
+            padding: 3px 9px;
+            font-size: 11px;
+            cursor: pointer;
+            font-family: 'Syne', sans-serif;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+
+        .copy-btn:hover {
+            background: rgba(52, 211, 153, 0.25);
+        }
+
+        .retrieved-box {
+            margin-top: 12px;
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 14px;
+            font-family: 'Space Mono', monospace;
+            font-size: 13px;
+            color: var(--text);
+            white-space: pre-wrap;
+            word-break: break-word;
+            display: none;
+            line-height: 1.6;
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 0.7s linear infinite;
+            vertical-align: middle;
+            margin-right: 6px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .footer-note {
+            text-align: center;
+            font-size: 11px;
+            color: var(--muted);
+            margin-top: 24px;
+            font-family: 'Space Mono', monospace;
+        }
     </style>
 </head>
 
 <body>
-
 <div class="container">
 
-    <h2>Online Sender</h2>
+    <div class="header">
+        <h2>Online Sender</h2>
+        <p>Instant text sharing via shareable codes</p>
+    </div>
 
-    <textarea id="content" placeholder="Enter text"></textarea>
-    <input type="number" id="expiry" value="24">
+    <!-- SEND SECTION -->
+    <div class="section-label">Send</div>
+    <textarea id="content" placeholder="Paste or type your text here..."></textarea>
 
-    <button class="btn" onclick="createClipboard()">Generate Code</button>
+    <div class="row">
+        <input type="number" id="expiry" value="24" min="1" max="168">
+        <label>hour expiry</label>
+    </div>
 
+    <button class="btn btn-primary" id="send-btn" onclick="createClipboard()">Generate Code</button>
     <div id="send-alert" class="alert"></div>
 
-    <br><br>
+    <hr class="divider">
 
-    <input type="text" id="code-input" placeholder="Enter code">
-    <button class="btn" onclick="retrieveClipboard()">Retrieve</button>
+    <!-- RECEIVE SECTION -->
+    <div class="section-label">Retrieve</div>
+    <input type="text" id="code-input" placeholder="Enter your code...">
+    <button class="btn btn-secondary" id="retrieve-btn" onclick="retrieveClipboard()">Retrieve Content</button>
 
     <div id="receive-alert" class="alert"></div>
-    <div id="retrieved-content"></div>
+    <div id="retrieved-content" class="retrieved-box"></div>
 
+    <p class="footer-note">by SHAN &nbsp;·&nbsp; data auto-expires</p>
 </div>
 
 <script>
@@ -56,48 +310,97 @@ const API_URL = "https://online-sender-2.onrender.com";
 
 async function createClipboard() {
     const content = document.getElementById('content').value.trim();
-   const expiry = parseInt(document.getElementById('expiry').value);
+    const expiry = parseInt(document.getElementById('expiry').value) || 24;
+    const btn = document.getElementById('send-btn');
+    const alertEl = document.getElementById('send-alert');
 
-    if (!content) return showAlert('send-alert', 'Enter content', false);
+    if (!content) return showAlert(alertEl, 'Please enter some content first.', false);
+
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spinner"></span>Generating...';
+    clearAlert(alertEl);
 
     try {
         const res = await fetch(`${API_URL}/api/clipboard`, {
             method: 'POST',
-            headers: {'Content-Type': 'application/json'},
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ content, expiryHours: expiry })
         });
 
-        if (!res.ok) throw new Error();
+        if (!res.ok) {
+            const errText = await res.text().catch(() => '');
+            throw new Error(`Server error ${res.status}${errText ? ': ' + errText.slice(0, 80) : ''}`);
+        }
 
         const data = await res.json();
-        showAlert('send-alert', 'Code: ' + data.code, true);
+        const code = data.code;
 
-    } catch {
-        showAlert('send-alert', 'Error!', false);
+        alertEl.className = 'alert success';
+        alertEl.innerHTML = `
+            Code generated!<br>
+            <div class="code-display" style="margin-top:6px">
+                <span class="code-val" id="gen-code">${code}</span>
+                <button class="copy-btn" onclick="copyCode('${code}')">Copy</button>
+            </div>`;
+
+    } catch (err) {
+        showAlert(alertEl, err.message || 'Unknown error occurred.', false);
+    } finally {
+        btn.disabled = false;
+        btn.innerHTML = 'Generate Code';
     }
 }
 
 async function retrieveClipboard() {
     const code = document.getElementById('code-input').value.trim();
+    const btn = document.getElementById('retrieve-btn');
+    const alertEl = document.getElementById('receive-alert');
+    const contentBox = document.getElementById('retrieved-content');
+
+    if (!code) return showAlert(alertEl, 'Please enter a code.', false);
+
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spinner"></span>Retrieving...';
+    clearAlert(alertEl);
+    contentBox.style.display = 'none';
 
     try {
         const res = await fetch(`${API_URL}/api/clipboard/${code}`);
 
-        if (!res.ok) throw new Error();
+        if (res.status === 404) throw new Error('Code not found or expired.');
+        if (!res.ok) {
+            const errText = await res.text().catch(() => '');
+            throw new Error(`Server error ${res.status}${errText ? ': ' + errText.slice(0, 80) : ''}`);
+        }
 
         const data = await res.json();
-        document.getElementById('retrieved-content').innerText = data.content;
-        showAlert('receive-alert', 'Success', true);
+        showAlert(alertEl, 'Content retrieved successfully!', true);
+        contentBox.textContent = data.content;
+        contentBox.style.display = 'block';
 
-    } catch {
-        showAlert('receive-alert', 'Not found', false);
+    } catch (err) {
+        showAlert(alertEl, err.message || 'Unknown error occurred.', false);
+    } finally {
+        btn.disabled = false;
+        btn.innerHTML = 'Retrieve Content';
     }
 }
 
-function showAlert(id, msg, success) {
-    const el = document.getElementById(id);
-    el.innerText = msg;
-    el.style.color = success ? "green" : "red";
+function showAlert(el, msg, success) {
+    el.className = 'alert ' + (success ? 'success' : 'error');
+    el.textContent = msg;
+}
+
+function clearAlert(el) {
+    el.className = 'alert';
+    el.textContent = '';
+}
+
+function copyCode(code) {
+    navigator.clipboard.writeText(code).then(() => {
+        const btn = document.querySelector('.copy-btn');
+        if (btn) { btn.textContent = 'Copied!'; setTimeout(() => btn.textContent = 'Copy', 1500); }
+    });
 }
 </script>
 
